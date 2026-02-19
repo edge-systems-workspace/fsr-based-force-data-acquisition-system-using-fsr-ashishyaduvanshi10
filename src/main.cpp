@@ -1,44 +1,53 @@
-#include <Arduino.h>
 /**
- * @file main.ino
- * @brief Embedded Force Measurement System using FSR
- * @author YOUR_NAME
- * @date YYYY-MM-DD
+ * @file AnalogReadExample.ino
+ * @author Ashish Kumar Yadav
+ * @date 2026-02-20
+ * @version 1.0
+ *
+ * @brief Reads analog input from pin A0 and prints the value to the Serial Monitor.
  *
  * @details
- * Reads analog force data from FSR sensor and
- * displays structured output via Serial Monitor.
+ * This program continuously reads the analog value from analog pin A0
+ * and sends the converted digital value to the serial interface
+ * every 500 milliseconds.
+ *
+ * The ADC resolution on standard Arduino boards is 10-bit,
+ * resulting in values from 0 to 1023.
+ *
+ * @note
+ * The input voltage on A0 must not exceed the board reference voltage.
+ *
+ * @warning
+ * Exceeding the maximum rated voltage on A0 may permanently damage
+ * the microcontroller.
  */
 
- // TODO 1:
- // Define FSR analog pin (Use A0)
+#include <Arduino.h>
 
- // TODO 2:
- // Create variable to store sensor reading
+/**
+ * @brief Stores the analog value read from pin A0.
+ */
+int value = 0;
 
-void setup() {
-
-    // TODO 3:
-    // Initialize Serial communication (9600 baud rate)
-
-    // TODO 4:
-    // Print system initialization message
+/**
+ * @brief Arduino setup function.
+ */
+void setup()
+{
+    Serial.begin(9600);     ///< Start serial communication
+    pinMode(A0, INPUT);     ///< Set analog pin as input
 }
 
-void loop() {
-
-    // TODO 5:
-    // Read analog value from FSR
-
-    // TODO 6:
-    // Print raw ADC value
-
-    // TODO 7:
-    // Apply simple threshold logic (e.g., detect pressure)
-
-    // TODO 8:
-    // Print pressure detection message
-
-    // TODO 9:
-    // Add delay (500ms or 1 second)
+/**
+ * @brief Arduino main loop function.
+ */
+void loop()
+{
+    value = analogRead(A0);     ///< Read analog value
+    Serial.println(value);      ///< Print value
+    delay(500);                 ///< Wait 500 milliseconds
 }
+
+
+
+
